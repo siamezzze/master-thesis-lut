@@ -31,6 +31,14 @@
 \usepackage{times}  % to change font to times
 \usepackage{setspace} % for linespacing
 \usepackage{url}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
 
 \newcommand{\nomunit}[1]{\renewcommand{\nomentryend}{\hspace*{\fill}#1}} % Inserts units on the right at symbol list
 \renewcommand{\nomgroup}[1]{%
@@ -75,14 +83,14 @@
 %\pagestyle{empty}
 \include{nimio}
 \include{abstract}
-\addtocontents{toc}{\contentsline {section}{Abstract}{}}
+%\addcontentsline{toc}{section}{ABSTRACT}%
 
 %\include{acknowledgments}
 %\addtocontents{toc}{\contentsline {section}{Acknowledgments}{}}%
 % \input{preface}
 % \cleardoublepage%
 % \thispagestyle{empty}%
-\addtocontents{toc}{\contentsline{section}{Contents}{}}%
+%\addcontentsline{toc}{section}{TABLE OF CONTENTS}%
 
 \tableofcontents%
 %\thispagestyle{empty}%
