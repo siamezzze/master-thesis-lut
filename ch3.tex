@@ -1,0 +1,47 @@
+\section{Diffoscope}
+
+This paper focuses on one of the tools being developed by
+Reproducible Build project - diffoscope.
+Diffoscope is a tool for in-depth comparison of files, archives and
+directories\cite{dfs}.
+The motivation behind development of diffoscope was to have a tool
+telling what exactly have changed between two builds by comparing 
+their results. Therefore, main focus areas for this tool are:
+\begin{itemize}
+    \item Support for file formats that are used in build artifacts. \\
+    Currently diffoscope supports various kinds of archives, packages,
+    as well as some resources file formats, such as JSON data or PNG images.
+    New file formats get constantly added by community.
+    \item User-friendly output.\\
+    Since the main goal of diffoscope is to provide users with a way to look
+    into what makes two files different, its developers always try to
+    improve the readability of output by hiding non-informative details and
+    emphasizing the real differences.
+\end{itemize}
+
+Diffoscope is free software licensed under the GNU General Public 
+License version 3 or later.
+It is available in the form of Debian package (unstable distribution), 
+Python package (PYPI), Homebrew package, Arch Linux package. Source code
+of diffoscope is also available from Git repository at \cite{dfs-git}. 
+There is also an online version of diffoscope \cite{try-dfs}, so users 
+can try this tool without installing it on their system.
+Bugs and feature requests can be submitted and reviewed at Debian
+bug tracking system \cite{dfs-bugs}.\\
+Community of diffoscope developers can be describing as having
+onion model \cite{aberdour2007achieving}.
+The project is being developed constantly by number of dedicated 
+developers and welcoming contributions as well as bug reports 
+and feature requests from everyone.
+Diffoscope development follows the Open Source Development Model 
+\cite{osdm}, with frequent small releases and constant quality improvements.
+These improvements are usually not planned in advance and often
+done as result of resolving a bug or fulfilling a feature request.\\
+In this paper, several improvements to diffoscope were implemented,
+with focus on better support of various file formats and usability.
+These improvements, too, were mostly dictated by bug and feature requests
+received for diffoscope.
+
+
+
+%\cleardoublepage

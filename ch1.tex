@@ -1,0 +1,38 @@
+\section{Introduction}
+
+\nopagebreak[4]{
+One of the main ideas behind Free and Open Source Software (FOSS) is that 
+anyone who uses this software can access the source code to make sure the 
+software does not perform any suspicious action. However, in practice software 
+products are often used in form of build artifacts - results of software build 
+process. These artifacts are usually not human-readable, rather consisting of 
+binaries intended to run on the user machine. Thus, they cannot be
+inspected to ensure quality. \\
+
+That approach introduces a potential flaw in security, where the result of 
+the build may be different from expected due to some changes on the building 
+system, either intended or accidental.\\
+
+Reproducible Builds effort aims at neglecting that flaw by comparing build 
+results from multiple parties and ensuring they all got the same results. 
+To make this process easier and to help software developers achieve 
+reproducibility of their products, several tools are being designed. \\
+
+This paper covers a process of improving \textbf{diffoscope} - a tool that 
+perform in-depth comparison for many file formats used in software development. 
+It is used widely by projects taking part in Reproducible Builds effort. \\
+In this work, number of features are added to diffoscope, making it more 
+useful for reproducibility testing.
+
+%In order to understand the cause of heterogeneity in granular
+%media, stress fluctuations are measured globally and locally
+%\citep{Liu95}. Some measurements showed that the spatial
+%distribution of force is highly inhomogeneous, which
+%intermittently changes in any position with time \citep{Mil96}.
+%Some models have been developed which could satisfactorily match
+%the statistics of stress fluctuations in granular material
+%\citep{De91,Liu95,Edw03,Gol04,Edw05}.\\}
+
+
+
+\cleardoublepage
