@@ -14,15 +14,16 @@
 %
 % tested with MiKTeX and WinEdt
 
+%\documentclass{lutmscthesis}[2017/01/24]
 \documentclass[a4paper,twoside,12pt,notitlepage,openright]{article}
-\usepackage[ansinew]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[dvips]{graphicx} %[dvips] to used with .eps figures
 \usepackage{natbib}
 \usepackage{lastpage}   % page count
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
-\usepackage[english]{babel}
+\usepackage[main=english, finnish]{babel}
 \usepackage[intoc]{nomencl} % including table of content
 \usepackage{ifthen}
 \usepackage[hmargin=3.0cm,vmargin=3.6cm]{geometry} % setting marginals
@@ -41,11 +42,11 @@
 
 \singlespacing
 
-\pagestyle{fancy}
-\fancyhf{}% clearing the header and footer
-\fancyhead[LE,RO]{\bfseries\thepage}    % page number to header
-\fancyhead[LO]{\nouppercase{\bfseries\rightmark}}     %
-\fancyhead[RE]{\nouppercase{\bfseries\leftmark}}%
+%\pagestyle{fancy}
+%\fancyhf{}% clearing the header and footer
+%\fancyhead[LE,RO]{\bfseries\thepage}    % page number to header
+%\fancyhead[LO]{\nouppercase{\bfseries\rightmark}}     %
+%\fancyhead[RE]{\nouppercase{\bfseries\leftmark}}%
 
 \renewcommand\sectionmark[1]
  {\markboth{\thesection\ #1}{}}         % section name to header
@@ -64,13 +65,14 @@
 \makenomenclature % makeindex main.nlo -s nomencl.ist -o main.nls
 %\bibpunct{(}{)}{;}{a}{,}{,}%
 
+\pagenumbering{arabic}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 
 \begin{document}
 
-\pagestyle{empty}
+%\pagestyle{empty}
 \include{nimio}
 \include{abstract}
 \addtocontents{toc}{\contentsline {section}{Abstract}{}}
@@ -83,9 +85,9 @@
 \addtocontents{toc}{\contentsline{section}{Contents}{}}%
 
 \tableofcontents%
-\thispagestyle{empty}%
+%\thispagestyle{empty}%
 %\cleardoublepage%
-%\pagestyle{fancy}%
+\pagestyle{fancy}%
 
 %\cleardoublepage%
 %\printnomenclature[2.0cm]%
