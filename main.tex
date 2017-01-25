@@ -24,7 +24,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage[main=english, finnish]{babel}
-\usepackage[intoc]{nomencl} % including table of content
+\usepackage[notintoc]{nomencl} % including table of content
 \usepackage{ifthen}
 \usepackage[hmargin=3.0cm,vmargin=3.6cm]{geometry} % setting marginals
 \usepackage{fancyhdr}  % header ja footer manipulation
@@ -72,6 +72,7 @@
 % makeindex command needs to run at command prompt to create nomenclature list file
 \makenomenclature % makeindex main.nlo -s nomencl.ist -o main.nls
 %\bibpunct{(}{)}{;}{a}{,}{,}%
+\renewcommand{\nomname}{LIST OF SYMBOLS AND ABBREVIATIONS}
 
 \pagenumbering{arabic}
 
@@ -95,11 +96,12 @@
 \tableofcontents%
 %\thispagestyle{empty}%
 %\cleardoublepage%
-\pagestyle{fancy}%
 
 %\cleardoublepage%
-%\printnomenclature[2.0cm]%
+\newpage
+\printnomenclature[2.0cm]%
 
+\pagestyle{fancy}%
 \include{ch1} %Introduction
 \include{ch2} %Reproducible Builds
 \include{ch3} %Diffoscope
