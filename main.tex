@@ -48,20 +48,22 @@
  \ifthenelse{\equal{#1}{H}}{\item\item[\textbf{Superscripts}]\item}{}}{%
  \ifthenelse{\equal{#1}{W}}{\item\item[\textbf{Abbreviations}]\item}{}}{}}
 
-\singlespacing
+%\singlespacing
+\renewcommand{\baselinestretch}{1.5}
 
 %\pagestyle{fancy}
 %\fancyhf{}% clearing the header and footer
+\renewcommand{\headrulewidth}{0pt}
 %\fancyhead[LE,RO]{\bfseries\thepage}    % page number to header
 %\fancyhead[LO]{\nouppercase{\bfseries\rightmark}}     %
 %\fancyhead[RE]{\nouppercase{\bfseries\leftmark}}%
 
-\renewcommand\sectionmark[1]
- {\markboth{\thesection\ #1}{}}         % section name to header
-\renewcommand\subsectionmark[1]
- {\markright{\thesubsection\ #1}}       % subsection name to header
-\renewcommand{\headrulewidth}{0.5pt}    % ruler thickness between head and body
-\renewcommand{\footrulewidth}{0pt}      % no ruler between body and footer
+%\renewcommand\sectionmark[1]
+% {\markboth{\thesection\ #1}{}}         % section name to header
+%\renewcommand\subsectionmark[1]
+% {\markright{\thesubsection\ #1}}       % subsection name to header
+%\renewcommand{\headrulewidth}{0.5pt}    % ruler thickness between head and body
+%\renewcommand{\footrulewidth}{0pt}      % no ruler between body and footer
 
 \setlength{\nomitemsep}{-\parsep}   % removing default extra skip between entries at nomenclature
 
@@ -86,7 +88,7 @@
 \include{abstract}
 %\addcontentsline{toc}{section}{ABSTRACT}%
 
-%\include{acknowledgments}
+\include{acknowledgments}
 %\addtocontents{toc}{\contentsline {section}{Acknowledgments}{}}%
 % \input{preface}
 % \cleardoublepage%
