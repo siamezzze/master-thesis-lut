@@ -9,49 +9,47 @@ internal quality assurance methods, and users of their products are expected
 to trust results of such assurance. While it is a working model for many
 companies, it may lead to cases when known or deliberately introduced flaws
 in software are hidden from end-user, the most known example being 2015
-Volkswagen emissions scandal \cite{Sch15}. \par
+Volkswagen emissions scandal \cite{Sch15}. \\\\
 FOSS, on the other hand, use completely different
 approach. While there is often no person directly responsible of quality assurance,
 publicly available source code mean that every interested user or company using
 that software, may examine the code for potential flaws, therefore assuring
-quality for themselves \cite{hoepman2007increased}. \par
+quality for themselves \cite{hoepman2007increased}.
 That model assumes that the source code ultimately defines the software product.
 However, in reality people usually use software products in forms of binaries,
 compared libraries or other form of build artifacts - results of software build
 process. In fact, it is more common for users to obtain software products in
 form of build artifacts distributed by someone who built it, rather than
-acquiring the source code and building it for themselves. \par
+acquiring the source code and building it for themselves. \\\\
 That consideration brings forth questions - is source code really the only
 thing that define the output of software building process? Does other factors,
 such as configuration of the build system, affect it? How can we be sure these
 factors do not cause the modification of the resulting binary? If they do
 modify it, then just ensuring the source code does not have any flaws does
 not guarantee the resulting binary does not have them - they could be introduced,
-whether intentionally or not, by build system. \\
+whether intentionally or not, by build system. \\\\
 Open-source projects that place an extra emphasis on security
 and privacy are especially concerned with this opportunity, as
 it may leave the systems they are building vulnerable to cyberattacks.
 It should come as no surprise that the \textbf{Tor} project was one of the
 first to ring the alarm, alerting others of the problem and taking first steps
-in ensuring what soon would be named reproducible builds\cite{tor13, tor14}.\\
+in ensuring what soon would be named reproducible builds\cite{tor13, tor14}.
 Since then, a lot of free software projects acknowledged the problem and
 tried to come up with a solution. Individual projects concerned with quality
 assurance of software they are producing started researching possible sources of
 non-determinism in build process as well as ways to remove them, as can be
-seen on example of \textbf{TrueCrypt} \cite{de2014challenges}.\\
-The leading role in the following actions taken to raise awareness of the
+seen on example of \textbf{TrueCrypt} \cite{de2014challenges}.\\\\
+An important role in the following actions taken to raise awareness of the
 problem was played by \textbf{Debian}, one of the most popular Linux distributions.
 Over the last two years, members of Debian community gathered these efforts
 under the flag of the project called Reproducible Builds \cite{Rb},
 gave numerous talks on technical conferences on the matter
-(\citep{Lun14, MiniDebConfCambridge2016, lca2017_valerie}), and organized
+(\citep{Lun14, lca2017_valerie}), and organized
 two summits dedicated to problem of reproducible builds. They also set up a continuous
 testing infrastructure \cite{tests-rbo}, which checks reproducibility
 of Debian packages, and designed several tools helping to find
 differences between build artifacts and identify common issues leading to
-unreproducible builds. \\
-As for January, 2017, 93\% of Debian packages
-build reproducibly, and that number continues to grow \cite{tests-rbo}.\\}
+unreproducible builds.}
 \subsection[Definitions]{Definitions}
 \nopagebreak[4]{
 As the aftermath the Reproducible Builds World Summit II (December, 2016),
