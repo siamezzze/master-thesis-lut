@@ -39,43 +39,20 @@ results and identifying common issues.\\
 
 This paper covers a process of improving diffoscope - a tool that
 perform in-depth comparison for many file formats used in software development.
-It is used widely by projects taking part in Reproducible Builds effort,
-both independently and as part of the testing system. In this work, several
-features are added to diffoscope, making it more useful for
-reproducibility testing.
+It is used widely by projects taking part in the Reproducible Builds.
+In this work, several features are added to diffoscope, making it more
+useful for reproducibility testing.
 }
 
-\subsection[Objectives and delimitations]{Objections and delimitations}
+\subsection[Objectives and delimitations]{Objectives and delimitations}
 \nopagebreak[4]{
-Main goal of this work is improvement of the diffoscope tool, making
+The main goal of this work is improvement of the diffoscope tool, making
 it more useful for the Reproducible Builds project.
-Nature of open source development process makes it difficult to pin down
-more specific objectives, as the requirements tend to shift all the time.
-However, there are general focus points for improvements, which could be defined
-as follows:
-\begin{itemize}
-    \item Improving support for individual file types.\\
-    For some file formats, additional information could be gathered and compared;
-    For some, on the other hand, it would be useful to limit an amount of information.
-    This work also includes reacting to the changes made in external tools used
-    to extract information from various kind of files and updated standards.
-    \item Improving overall usability of diffoscope.\\
-    There are some common issues not related to the specific file types,
-    but rather to an overall readability of output and ease of use of the tool.
-    In general, the goal here is to reduce the amount of noise (non-informative
-    output) and detect the most significant differences between files.
-    \item Improving run speed of diffoscope.\\
-    In real applications, diffoscope is often run on big files
-    like operating system (OS) images. It is used in continuous testing,
-    where there would be a lot of packages to test. Therefore, time and memory
-    resources are limited, and the tool cannot be allowed to run for too long.
-    It is important to make diffoscope as time-efficient as possible
-    without reducing its functionality.\\
-\end{itemize}
-This paper focuses on improvements made for the first two goals. While
-time-efficiency is very important, the main task in this field is, at the moment,
-making diffoscope run in parallel. The difficulty of this task renders it
-too big for the scope of the presented work.\\
+This paper focuses on improvements made for better file format support and
+user interaction. Diffoscope would also benefit from being more time-efficient,
+but in this field the main task is making diffoscope run in parallel.
+The difficulty of this task renders it too big for the scope of the
+presented work.\\
 Another important part of open source software development is testing.
 While it is hardly ever expressed as additional task, the development workflow
 itself dictates that every major change in the project should automatically come
@@ -87,9 +64,6 @@ to raise awareness of the build reproducibility problem and the collective
 Reproducible Builds effort. For this reason, a substantial part of
 the paper is dedicated to the details of this project, its motivation, goals,
 proposed methods and achieved results.\\
-Results of the work are going to be discussed in the light of what does it
-provide for the Reproducible Builds project enthusiasts and how does
-it help to achieve the project's goals.
 }
 
 \subsection[Structure of the thesis]{Structure of the thesis}
