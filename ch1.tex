@@ -1,53 +1,54 @@
 \section{Introduction}
 \subsection[Background]{Background}
+\setlength{\parskip}{1.0pt}
 \nopagebreak[4]{
 \nomenclature{FOSS}{Free and Open Source Software}
 \nomenclature{OS}{Operating System}
-One of the main ideas behind Free and Open Source Software 
-(FOSS) is that 
-anyone who uses that software can access the source code to make sure the 
-software does not perform any suspicious action. However, in practice software 
-products are often used in form of build artifacts - results of software build 
-process. These artifacts are usually not human-readable, rather consisting of 
-binaries intended to run on the user machine or compiled libraries. 
+One of the main ideas behind Free and Open Source Software
+(FOSS) is that
+anyone who uses that software can access the source code to make sure the
+software does not perform any suspicious action. However, in practice software
+products are often used in form of build artifacts - results of software build
+process. These artifacts are usually not human-readable, rather consisting of
+binaries intended to run on the user machine or compiled libraries.
 Thus, they cannot be inspected to ensure quality. \\
 
-That approach introduces a potential flaw in quality assurance, where the result of 
-the build may be different from expected due to some changes on the building 
-system, either intended or accidental. That flaw can be exploited in order 
-to break software security - something that most open source software take very 
+That approach introduces a potential flaw in quality assurance, where the result of
+the build may be different from expected due to some changes on the building
+system, either intended or accidental. That flaw can be exploited in order
+to break software security - something that most open source software take very
 seriously. Possibility of changes being introduced by build process
 also have a negative impact on development process, since it becomes
 impossible to tell for sure what changes have been introduced by
 changes in the source code, and which were caused by build process.\\
 
-\textbf{Reproducible Builds} project aims at neglecting that flaw by comparing build 
+The Reproducible Builds project aims at neglecting that flaw by comparing build
 results from multiple parties and ensuring they all got the same results.
 It is a collective effort of multiple free software projects concerning
 about quality and security of their product. The goal of the project is
 to ensure that open source software built under different environments
-produces exactly the same results. If that goal is achieved, users 
+produces exactly the same results. If that goal is achieved, users
 of the software would be able to compare build results between each other,
-and if someone's results are different, that would be a warning message meaning 
+and if someone's results are different, that would be a warning message meaning
 their build system could be compromised.\\
 
-To help software developers achieve reproducibility of their products, 
-several tools were created by \textbf{Reproducible Builds} team.
-These tools are designed for testing reproducibility of software, comparing build 
+To help software developers achieve reproducibility of their products,
+several tools were created by the Reproducible Builds team.
+These tools are designed for testing reproducibility of software, comparing build
 results and identifying common issues.\\
 
-This paper covers a process of improving \textbf{diffoscope} - a tool that 
-perform in-depth comparison for many file formats used in software development. 
-It is used widely by projects taking part in \textbf{Reproducible Builds} effort, 
-both independently and as part of the testing system. In this work, several 
-features are added to \textbf{diffoscope}, making it more useful for 
+This paper covers a process of improving diffoscope - a tool that
+perform in-depth comparison for many file formats used in software development.
+It is used widely by projects taking part in Reproducible Builds effort,
+both independently and as part of the testing system. In this work, several
+features are added to diffoscope, making it more useful for
 reproducibility testing.
 }
 
-\subsection[Objections and delimitations]{Objections and delimitations}
+\subsection[Objectives and delimitations]{Objections and delimitations}
 \nopagebreak[4]{
-Main goal of this work is improvement of \textbf{diffoscope} tool, making
-it more useful for the \textbf{Reproducible Builds}.
+Main goal of this work is improvement of the diffoscope tool, making
+it more useful for the Reproducible Builds project.
 Nature of open source development process makes it difficult to pin down
 more specific objectives, as the requirements tend to shift all the time.
 However, there are general focus points for improvements, which could be defined
@@ -58,52 +59,52 @@ as follows:
     For some, on the other hand, it would be useful to limit an amount of information.
     This work also includes reacting to the changes made in external tools used
     to extract information from various kind of files and updated standards.
-    \item Improving overall usability of \textbf{diffoscope}.\\
+    \item Improving overall usability of diffoscope.\\
     There are some common issues not related to the specific file types,
     but rather to an overall readability of output and ease of use of the tool.
     In general, the goal here is to reduce the amount of noise (non-informative
     output) and detect the most significant differences between files.
-    \item Improving run speed of \textbf{diffoscope}.\\
-    In real applications, \textbf{diffoscope} is often run on big files
+    \item Improving run speed of diffoscope.\\
+    In real applications, diffoscope is often run on big files
     like operating system (OS) images. It is used in continuous testing,
     where there would be a lot of packages to test. Therefore, time and memory
     resources are limited, and the tool cannot be allowed to run for too long.
-    It is important to make \textbf{diffoscope} as time-efficient as possible
+    It is important to make diffoscope as time-efficient as possible
     without reducing its functionality.\\
 \end{itemize}
-This paper focuses on improvements made for the first two goals. While 
-time-efficiency is very important, the main task in this field is, at the moment, 
-making \textbf{diffoscope} run in parallel. The difficulty of this task renders it
+This paper focuses on improvements made for the first two goals. While
+time-efficiency is very important, the main task in this field is, at the moment,
+making diffoscope run in parallel. The difficulty of this task renders it
 too big for the scope of the presented work.\\
 Another important part of open source software development is testing.
 While it is hardly ever expressed as additional task, the development workflow
-itself dictates that every major change in the project should automatically come 
+itself dictates that every major change in the project should automatically come
 with tests for affected functionality. Although such tests are going to be added
-for the improvements made as part of this work, the paper will not discuss it in 
+for the improvements made as part of this work, the paper will not discuss it in
 details.\\
-Apart from a practical goal of improving \textbf{diffoscope}, this work aims
+Apart from a practical goal of improving diffoscope, this work aims
 to raise awareness of the build reproducibility problem and the collective
-\textbf{Reproducible Builds} effort. For this reason, a substantial part of
+Reproducible Builds effort. For this reason, a substantial part of
 the paper is dedicated to the details of this project, its motivation, goals,
 proposed methods and achieved results.\\
 Results of the work are going to be discussed in the light of what does it
-provide for the \textbf{Reproducible Builds} project enthusiasts and how does
+provide for the Reproducible Builds project enthusiasts and how does
 it help to achieve the project's goals.
 }
 
 \subsection[Structure of the thesis]{Structure of the thesis}
 \nopagebreak[4]{
-Section 2 explain in detail what \textbf{Reproducible Builds} project is. Short 
+Section 2 explain in detail what the Reproducible Builds project is. Short
 background of the problem and motivation for this collective effort are given.
-That section also include definition of reproducible builds, and gives a short 
-review of tools and solutions that the project has achieved so far.\\
+That section also include definition of reproducible builds, and gives a short
+review of tools and solutions that the project has achieved so far.
 Section 3 gives more details about the specific tool developed
-as part of \textbf{Reproducible Builds} effort - \textbf{diffoscope}. It 
-provides general information about project, its development model and 
-ways of distributing.\\
+as part of the Reproducible Builds effort - diffoscope. It
+provides general information about project, its development model and
+ways of distributing.
 Section 4 focuses on specific problems this work is aiming to solve.
-While the main goal is improvement of \textbf{diffoscope} according
-to the \textbf{Reproducible Builds} project needs, some specific ways of
+While the main goal is improvement of diffoscope according
+to the Reproducible Builds project needs, some specific ways of
 improvement are described in more details.
 }
 
