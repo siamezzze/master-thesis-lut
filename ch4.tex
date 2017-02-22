@@ -8,9 +8,9 @@
 \nomenclature{TAR}{(t)ape (ar)chive - computer software utility for collecting many files into one archive file}
 \nomenclature{BZIP2}{free and open-source file compression program that uses the Burrows–Wheeler algorithm}
 
-Diffoscope finds difference between files of various formats by using external
+Diffoscope finds difference between files of various formats in two steps. First, it uses external
 tools specific to this file format to retrieve information about the file in
-human-readable format, and then finding difference between outputs of that tools.
+human-readable format. Then diffoscope runs the diff tool to find a difference between outputs of that tools.
 Object-oriented structure of the code makes it relatively easy to add support for
 new file format, and this is one of the obvious ways to improve diffoscope.
 However, even for the file formats that are already supported, there is still work

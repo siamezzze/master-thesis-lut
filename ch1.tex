@@ -22,9 +22,9 @@ also have a negative impact on development process, since it becomes
 impossible to tell for sure what changes have been introduced by
 changes in the source code, and which were caused by build process.\\
 
-The Reproducible Builds project aims at neglecting that flaw by comparing build
+The Reproducible Builds project aims at mitigating that flaw by comparing build
 results from multiple parties and ensuring they all got the same results.
-It is a collective effort of multiple free software projects concerning
+It is a collective effort of multiple free software projects concerned
 about quality and security of their product. The goal of the project is
 to ensure that open source software built under different environments
 produces exactly the same results. If that goal is achieved, users
@@ -37,8 +37,8 @@ several tools were created by the Reproducible Builds team.
 These tools are designed for testing reproducibility of software, comparing build
 results and identifying common issues.\\
 
-This paper covers a process of improving diffoscope - a tool that
-perform in-depth comparison for many file formats used in software development.
+This paper covers a process of improving diffoscope, a tool that
+performs in-depth comparison for many file formats used in software development.
 It is used widely by projects taking part in the Reproducible Builds.
 In this work, several features are added to diffoscope, making it more
 useful for reproducibility testing.
@@ -69,14 +69,14 @@ proposed methods and achieved results.
 
 \subsection[Structure of the thesis]{Structure of the thesis}
 \nopagebreak[4]{
-Section 2 explain in detail what the Reproducible Builds project is. Short
+Section 2 explains in detail what the Reproducible Builds project is. Short
 background of the problem and motivation for this collective effort are given.
-That section also includes definition of reproducible builds, and gives a short
+This section also includes definition of reproducible builds, and gives a short
 review of tools and solutions that the project has achieved so far.
 Section 3 gives more details about the specific tool developed
-as part of the Reproducible Builds effort - diffoscope. It
-provides general information about project, its development model and
-ways of distributing.
+as part of the Reproducible Builds effort, diffoscope. It
+provides general information about the project, its development model and
+ways of distribution.
 Section 4 focuses on specific problems this work is aiming to solve.
 While the main goal is improvement of diffoscope according
 to the Reproducible Builds project needs, some specific ways of
