@@ -1,52 +1,53 @@
-\section{Reproducible Builds}
+\section{Reproducible Builds for Open-Source Software}
+\nomenclature{FUSE}{Filesystem in Userspace}
 
-\subsection[Reproducible Builds for Open-Source Software]{Reproducible Builds for Open-Source Software: motivation and history}
+\subsection[Reproducible Builds for Open-Source Software]{Motivation and history}
 \nopagebreak[4]{
-With the increasing popularity of open-source software \cite{Anthes16a} and its adoption in large
+With the increasing popularity of open-source software \autocite{Anthes16a} and its adoption in large
 scale systems, the security and quality assurance of that software becomes a
 high-priority question. Commercial closed-source software projects rely on
 internal quality assurance methods, and users of their products are expected
 to trust results of such assurance. While it is a working model for many
 companies, it may lead to cases when known or deliberately introduced flaws
 in software are hidden from end-user, the most known example being 2015
-Volkswagen emissions scandal \cite{Sch15}. \\\\
+Volkswagen emissions scandal \autocite{Sch15}. \\\\
 FOSS, on the other hand, use completely different
 approach. While there is often no person directly responsible of quality assurance,
 publicly available source code mean that every interested user or company using
 that software, may examine the code for potential flaws, therefore assuring
-quality for themselves \cite{hoepman2007increased}.
+quality for themselves \autocite{hoepman2007increased}.
 That model assumes that the source code ultimately defines the software product.
 However, in reality people usually use software products in forms of binaries,
-compared libraries or other form of build artifacts - results of software build
+compared libraries or other form of build artifacts, which are the results of software build
 process. In fact, it is more common for users to obtain software products in
 form of build artifacts distributed by someone who built it, rather than
 acquiring the source code and building it for themselves. \\\\
-That consideration brings forth questions - is source code really the only
+That consideration brings forth certain questions. Is source code really the only
 thing that define the output of software building process? Does other factors,
 such as configuration of the build system, affect it? How can we be sure these
 factors do not cause the modification of the resulting binary? If they do
 modify it, then just ensuring the source code does not have any flaws does
-not guarantee the resulting binary does not have them - they could be introduced,
+not guarantee the resulting binary does not have them, since they could be introduced,
 whether intentionally or not, by build system. \\\\
 Open-source projects that place an extra emphasis on security
 and privacy are especially concerned with this opportunity, as
 it may leave the systems they are building vulnerable to cyberattacks.
-It should come as no surprise that the \textbf{Tor} project was one of the
+It should come as no surprise that the Tor project was one of the
 first to ring the alarm, alerting others of the problem and taking first steps
-in ensuring what soon would be named reproducible builds\cite{tor13, tor14}.
+in ensuring what soon would be named reproducible builds \autocite{tor13, tor14}.
 Since then, a lot of free software projects acknowledged the problem and
 tried to come up with a solution. Individual projects concerned with quality
 assurance of software they are producing started researching possible sources of
 non-determinism in build process as well as ways to remove them, as can be
-seen on example of \textbf{TrueCrypt} \cite{de2014challenges}.\\\\
+seen on example of TrueCrypt \autocite{de2014challenges}.\\\\
 An important role in the following actions taken to raise awareness of the
-problem was played by \textbf{Debian}, one of the most popular Linux distributions.
+problem was played by Debian, one of the most popular Linux distributions.
 Over the last two years, members of Debian community gathered these efforts
-under the flag of the project called Reproducible Builds \cite{Rb},
+under the flag of the project called Reproducible Builds \autocite{rb},
 gave numerous talks on technical conferences on the matter
-(\citep{Lun14, lca2017_valerie}), and organized
+\autocite{Lun14, lca2017_valerie}, and organized
 two summits dedicated to problem of reproducible builds. They also set up a continuous
-testing infrastructure \cite{tests-rbo}, which checks reproducibility
+testing infrastructure \autocite{tests-rbo}, which checks reproducibility
 of Debian packages, and designed several tools helping to find
 differences between build artifacts and identify common issues leading to
 unreproducible builds.}
@@ -54,10 +55,10 @@ unreproducible builds.}
 \nopagebreak[4]{
 As the aftermath the Reproducible Builds World Summit II (December, 2016),
 representatives of projects taking part in the Reproducible Builds effort
-agreed on following definition of reproducible build \cite{rb-def}:
+agreed on following definition of reproducible build \autocite{rb-def}:
 \theoremstyle{definition}
 \begin{definition}{Reproducible build.} \\
-A build is \textbf{reproducible} if given the same source code, build environment and build
+A build is reproducible if given the same source code, build environment and build
 instructions, any party can recreate bit-by-bit identical copies of all specified artifacts.
 \\
 \\
@@ -68,24 +69,24 @@ desired primary output.
 \end{definition}
 
 
-The following terms are used in this definition \cite{rb-def}:
+The following terms are used in this definition \autocite{rb-def}:
 \begin{itemize}
-    \item \textbf{Source code} is usually a checkout from version control at a
+    \item Source code is usually a checkout from version control at a
     specific revision or a source code archive.
 
-    \item \textbf{Relevant attributes of the build environment} would usually include
+    \item Relevant attributes of the build environment would usually include
     dependencies and their versions, build configuration flags and environment
     variables as far as they are used by the build system (e.g. the locale).
     It is preferable to reduce this set of attributes.
 
-    \item \textbf{Artifacts} would include executables, distribution packages or
+    \item Artifacts would include executables, distribution packages or
     filesystem images. They would not usually include build logs or similar ancillary
     outputs.
 
-    \item The reproducibility of artifacts is \textbf{verified} by bit-by-bit comparison.
+    \item The reproducibility of artifacts is verified by bit-by-bit comparison.
     This is usually performed using cryptographically secure hash functions.
 
-    \item \textbf{Authors or distributors} means parties that claim reproducibility of
+    \item Authors or distributors means parties that claim reproducibility of
     a set of artifacts. These may be upstream authors, distribution maintainers or any
     other distributor.
 \end{itemize}
@@ -98,20 +99,21 @@ A number of tools was designed by the Reproducible Builds community to help open
 projects check their products for reproducibility, find out what gets changed between
 two builds and identify common unreproducibility issues.
 \begin{itemize}
-    \item \textbf{Diffoscope} - a tool for in-depth comparison of files, archives,
+    \item Diffoscope is a tool for in-depth comparison of files, archives,
           and directories.
-    \item \textbf{Trydiffoscope} - online version of diffoscope.
-    \item \textbf{Disorderfs} - an overlay FUSE filesystem that deliberately introduces
+    \item Trydiffoscope is an online version of diffoscope.
+    \item Disorderfs is an overlay FUSE (Filesystem in Userspace) filesystem that           
+          deliberately introduces
           non-determinism into filesystem metadata.
-    \item \textbf{Strip-nondeterminism} - library for stripping non-deterministic
+    \item Strip-nondeterminism is a library for stripping non-deterministic
           information, such as timestamps and file system order, from files.
-    \item \textbf{Reprotest} - a tool for building the same source code under
+    \item Reprotest is a tool for building the same source code under
           different environments to check if these changes led to changes
           in the resulting binaries.
 \end{itemize}
 
 The Reproducible Builds project members have also come up with a
-\textbf{\texttt{SOURCE\_DATE\_EPOCH}} specification \cite{SDEspec},
+\texttt{SOURCE\_DATE\_EPOCH} specification \autocite{SDEspec},
 defining a distribution-agnostic standard for build systems to exchange a
 timestamp, which has proven to be one of the most common
 source of reproducibility issues.

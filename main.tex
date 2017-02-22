@@ -18,12 +18,18 @@
 \documentclass[a4paper,twoside,12pt,notitlepage,openright]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[dvips]{graphicx} %[dvips] to used with .eps figures
-\usepackage{natbib}
+%\usepackage{natbib}
 \usepackage{lastpage}   % page count
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage[main=english, finnish]{babel}
+\usepackage{csquotes}
+\usepackage[
+    backend=biber,
+    style=numeric,
+    citestyle=numeric 
+]{biblatex}
 \usepackage[notintoc]{nomencl} % including table of content
 \usepackage{ifthen}
 \usepackage[hmargin=3.0cm,vmargin=3.6cm]{geometry} % setting marginals
@@ -40,6 +46,7 @@
     linkcolor=black,
     urlcolor=black
 }
+\addbibresource{ref.bib}
 
 \newcommand{\nomunit}[1]{\renewcommand{\nomentryend}{\hspace*{\fill}#1}} % Inserts units on the right at symbol list
 \renewcommand{\nomgroup}[1]{%
@@ -117,9 +124,10 @@
 %\def\refname{what ever}% to change References title
 \addcontentsline{toc}{section}{References}%
 
-\bibliography{ref}%
+%\bibliography{ref}%
 %\bibliographystyle{LUTapa}%
-\bibliographystyle{abbrv}
+%\bibliographystyle{abbrv}
+\printbibliography
 
 %\cleardoublepage %
 
