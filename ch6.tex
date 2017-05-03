@@ -1,8 +1,11 @@
 \section{New features}
-\nomenclature{ASCII}{}
-\nomenclature{TLSH}{}
-\nomenclature{HTML}{}
-\nomenclature{XML}{}
+\nomenclature{ASCII}{American Standard Code for Information Interchange -- a character encoding standard}
+\nomenclature{TLSH}{Trend Micro Locality Sensitive Hash}
+\nomenclature{HTML}{Hypertext Markup Language}
+\nomenclature{XML}{Extensible Markup Language}
+\nomenclature{URI}{Uniform Resource Identifier}
+\nomenclature{XZ}{lossless data compression program and file format}
+\nomenclature{EXIF}{Exchangeable Image File Format}
 
 \subsection[Order-like difference]{Order-like difference}
 \nopagebreak[4]{
@@ -46,11 +49,11 @@ Better support for APK files allows for a more informative diffoscope output pro
 \nopagebreak[4]{
 Since diffoscope is mainly used to compare packages, support for the images is needed mainly for resource files used in some software. Currently, supported format include JPEG, ICO and PNG.
 
-The main approach to comparison of images at the moment involves converting them into ASCII-pseudographics using \texttt{libcaca} and comparing the resulting text. That approach allows for identifying issues related to content of the image, but some information -- such as palette, EXIF data, number of colors -- might be lost. Considering this, the new feature, comparison of image metadata, was added to diffoscope.
+The main approach to comparison of images at the moment involves converting them into ASCII-pseudographics using \texttt{libcaca} and comparing the resulting text. That approach allows for identifying issues related to content of the image, but some information -- such as palette, EXIF data, number of colors -- might be lost. Considering this, the new feature, comparison of image metadata, was added to diffoscope.\\
 Metadata comparison is enabled for JPEG and ICO images. Information about the image is retrieved using \texttt{ImageMagick} tool.
 The list of image properties extracted include image format, file size, height, width, orientation, compression type, compression quality, colourspace, number of channels and others. Information is extracted in text form and then compared using text comparison.
 
-In addition, in cases where diffoscope is producing HTML output, it is possible to output images without converting them to text form. In these cases, generating ``visual difference'', image, showing the difference in the visual form, can result in more informative output then pseudographic allows.
+In addition, in cases where diffoscope is producing HTML output, it is possible to output images without converting them to text form. In these cases, generating ``visual difference'', image, showing the difference in the visual form, can result in more informative output then pseudographics allows.
 This behaviour was implemented in form of providing an additional field for the \texttt{Difference} objects, containing the visual difference images. These images are converted to \texttt{base64} form and embedded into the resulting HTML page using data URI protocol. Two types of visual difference are being generated for each pair of images at the moment:
 \begin{itemize}[noitemsep]
   \item Pixel difference -- generated using \texttt{ImageMagick} \texttt{compare} tool. This kind of images underlines all the pixels that have different values for the compared images. This often includes differences not noticeable by human eye, such as compression artifacts.
@@ -63,14 +66,11 @@ Currently, visual difference is computed only for the images of the same size an
 \subsection[Cross-container comparison]{Cross-container comparison}
 \nopagebreak[4]{
 The problem of comparing different types of archives was considered to be best solved by alerting fuzzy-matching module.
-Fuzzy-matching is the method of finding similarities in files even when their names are different. 
 Diffoscope uses TLSH \autocite{oliver2013tlsh} library that implements fuzzy-matching using special hash values for files. 
-By comparing hash values for different files, diffoscope is able to correctly recognize renamed files even when there is difference in content.
+By comparing hash values for different files, diffoscope is able to correctly recognize renamed files even when there is difference in content.\\
 However, implementing the similar behaviour for containers was not a trivial task. 
-If the container is considered a regular file and the hash is computed as for any other type of file, the result will be dependent on the type of the container, compression method, etc. Another option would be to compute the hash as combination of individual files' hashes. Unfortunately, that approach leads to unnecessary increase in computation time, since every container has to be extracted before finding correspondence.
-
-Even more important is the problem of comparing the nested containers. The most common use case is comparing compressed tarballs, e.g. \texttt{TAR.GZ} with \texttt{ZIP} archives. Both approaches described above would fail at this example, since not only the archive type, but the nesting level is different. However, both methods are quite common for software distribution, and it is desirable to have diffoscope compare their content, instead of stopping on the difference in the container type.
-
+If the container is considered a regular file and the hash is computed as for any other type of file, the result will be dependent on the type of the container, compression method, etc. Another option would be to compute the hash as combination of individual files' hashes. Unfortunately, that approach leads to unnecessary increase in computation time, since every container has to be extracted before finding correspondence.\\
+Even more important is the problem of comparing the nested containers. The most common use case is comparing compressed tarballs, e.g. \texttt{TAR.GZ} with \texttt{ZIP} archives. Both approaches described above would fail at this example, since not only the archive type, but the nesting level is different. However, both methods are quite common for software distribution, and it is desirable to have diffoscope compare their content, instead of stopping on the difference in the container type.\\
 The proposed changes implement the following behaviour:
 \begin{itemize}[noitemsep]
 \item If both compared objects are containers, but have different types, they are compared by finding difference in:
@@ -79,7 +79,7 @@ The proposed changes implement the following behaviour:
 \item List of content
 \item Content
 \end{itemize}
-\item If one of the compared containers has one of following types: \texttt{GZ}, \texttt{BZ2}, \texttt{XZ}, \texttt{DEX}, it gets unpacked and the content is compared instead of the container. This can be safely done because all of these container types are guaranteed to have only one member. This way, the most common use case of nested containers is addressed.
+\item If one of the compared containers has one of following types: \texttt{gzip}, \texttt{bzip2}, \texttt{xz}, \texttt{dex}, it gets unpacked and the content is compared instead of the container. This can be safely done because all of these container types are guaranteed to have only one member. This way, the most common use case of nested containers is addressed.
 \end{itemize}
 
 The described changes are currently under review and therefore are not included in diffoscope yet.
