@@ -64,7 +64,7 @@ Currently, visual difference is computed only for the images of the same size an
 \nopagebreak[4]{
 The problem of comparing different types of archives was considered to be best solved by alerting fuzzy-matching module.
 Fuzzy-matching is the method of finding similarities in files even when their names are different. 
-Diffoscope uses TLSH library that implements fuzzy-matching using special hash values for files. 
+Diffoscope uses TLSH \autocite{oliver2013tlsh} library that implements fuzzy-matching using special hash values for files. 
 By comparing hash values for different files, diffoscope is able to correctly recognize renamed files even when there is difference in content.
 However, implementing the similar behaviour for containers was not a trivial task. 
 If the container is considered a regular file and the hash is computed as for any other type of file, the result will be dependent on the type of the container, compression method, etc. Another option would be to compute the hash as combination of individual files' hashes. Unfortunately, that approach leads to unnecessary increase in computation time, since every container has to be extracted before finding correspondence.

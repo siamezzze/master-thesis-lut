@@ -11,28 +11,13 @@ Any significant change in the diffoscope should be backed up with a few tests
 that make sure the new behavior matches the expected one. \\
 As for now, diffoscope test suite contains around 300 unit tests.
 }
-\subsection[Compatibility with older versions]{Compatibility with older versions}
-\nopagebreak[4]{
-Diffoscope relies on many external tools to do its work. Some of them being crucial 
-for the whole program to work while others can enhance its work in some cases.
-These tools are considered to be coming from the user's operating system. In case of 
-Debian, that means we are relying on the Debian repositories to provide user with 
-necessary packages.\\
-At the moment, diffoscope is available in Debian unstable and Debian stable backports 
-distributions. Stable Debian distribution is older than unstable, and it has older versions
-of required tools. To make sure stable version is properly supported, diffoscope should be tested
-in both environments.\\
-There was several issues related to backward compatibility that occurred and were resolved 
-as part of the described work.
-
-
-}
-\subsection[New test cases]{New test cases}
+\subsection[Test cases for order-like difference]{New test cases}
 \nopagebreak[4]{
   For every change introduced, there were several tests added.
   In particular, APK files comparison test suite was added to the project,
   and image comparison tests were refilled with tests checking image metadata extraction
   and comparison.
+  
 }
 
 
