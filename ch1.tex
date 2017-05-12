@@ -6,29 +6,26 @@
 \nomenclature{OS}{Operating System}
 One of the main ideas behind Free and Open Source Software
 (FOSS) is that
-anyone who uses that software can access the source code to make sure the
-software does not perform any suspicious action. However, in practice software
+anyone who uses the software can access the source code to make sure it does not perform 
+any suspicious actions. However, in practice software
 products are often used in form of build artifacts, which are results of software build
 process. These artifacts are usually not human-readable, rather consisting of
 binaries intended to run on the user machine or compiled libraries.
-Thus, they cannot be inspected to ensure quality. \\
+Thus, they cannot be inspected to ensure quality and security of the software. \\
 
-That approach introduces a potential flaw in quality assurance, where the result of
-the build may be different from expected due to some changes on the building
-system, either intended or accidental. That flaw can be exploited in order
-to break software security, which is something that most open source software take very
+The described approach introduces a potential flaw in quality assurance, where the result of
+the build may be different from expected due to some changes on the build stage, either intended or accidental. That flaw can be exploited in order
+to break software security, which is something that most open source software projects take very
 seriously. Possibility of changes being introduced by build process
 also have a negative impact on development process, since it becomes
-impossible to tell for sure what changes have been introduced by
-changes in the source code, and which were caused by build process.\\
+impossible to tell for sure what changes have been introduced by the
+changes in the source code, and which were caused by build process.
+To solve this problem, people who develop and distribute software must ensure that their build process is deterministic with respect to different build environments.  \\
 
-The Reproducible Builds project aims at mitigating that flaw by comparing build
-results from multiple parties and ensuring they all got the same results.
-It is a collective effort of multiple free software projects concerned
-about quality and security of their product. The goal of the project is
-to ensure that open source software built under different environments
-produces exactly the same results. If that goal is achieved, users
-of the software would be able to compare build results between each other,
+The Reproducible Builds project is a collective effort of multiple free software projects concerned
+about quality and security of their products. The goal of the project is
+to ensure that the software built under different environments
+produces exactly the same results. If that goal is achieved, people who build the software would be able to compare results between each other,
 and if someone's results are different, that would be a warning message meaning
 their build system could be compromised.\\
 
@@ -37,50 +34,43 @@ several tools were created by the Reproducible Builds team.
 These tools are designed for testing reproducibility of software, comparing build
 results and identifying common issues.\\
 
-This report covers a process of improving diffoscope, a tool that
-performs in-depth comparison for many file formats used in software development.
-It is used widely by projects taking part in the Reproducible Builds.
-In this work, several features are added to diffoscope, making it more
-useful for reproducibility testing.
+This study describes how the reproducibility issues are identified, categorized and dealt with by Reproducible Builds project, and the tools used in this process. 
+In particular, this thesis describes diffoscope, a tool that performs in-depth comparison for many file formats used in software development. This tool is widely used to identify reproducibility issues affecting software.
+As part of this work, several features were added to diffoscope, enhancing its performance on specific types of files.
 }
 
 \setlength{\parskip}{1.0pt}
 \subsection[Objectives and delimitations]{Objectives and delimitations}
 \nopagebreak[4]{
-The main goal of this work is improvement of the diffoscope tool, making
+The practical goal of this thesis is improvement of the diffoscope tool, making
 it more useful for the Reproducible Builds project.
-This work focuses on improvements made for better file format support and
-user interaction. Diffoscope would also benefit from being more time-efficient,
+This work focuses on improvements made for specific types of files, aiming to provide a more human-readable comparison results for them. 
+Diffoscope would also benefit from speed improvements,
 but in this field the main task is making diffoscope run in parallel.
 The difficulty of this task renders it too big for the scope of the
 presented work.\\\\
-Another important part of open source software development is testing.
-While it is hardly ever expressed as additional task, the development workflow
-itself dictates that every major change in the project should automatically come
-with tests for affected functionality. Although such tests are going to be added
-for the improvements made as part of this work, the report does not discuss them in
-details.\\\\
-Apart from a practical goal of improving diffoscope, this work aims
-to raise awareness of the build reproducibility problem and the collective
-Reproducible Builds effort. For this reason, a substantial part of
-the report is dedicated to the details of this project, its motivation, goals,
+Apart from the practical goal described above, this work aims
+to raise awareness of the build reproducibility problem and ways to solve it. For this reason, a substantial part of
+the report is dedicated to the details of the Reproducible Builds project, its motivation, goals,
 proposed methods and achieved results.
 }
 
 \subsection[Structure of the thesis]{Structure of the thesis}
 \nopagebreak[4]{
+% TODO: TBA!
 Section 2 explains in detail what the Reproducible Builds project is. Short
 background of the problem and motivation for this collective effort are given.
 This section also includes definition of reproducible builds, and gives a short
 review of tools and solutions that the project has achieved so far.
-Section 3 gives more details about the specific tool developed
-as part of the Reproducible Builds effort, diffoscope. It
-provides general information about the project, its development model and
+Section 3 gives more details about diffoscope, the tool developed
+as part of the Reproducible Builds effort. It
+provides general information about the tool, its development model and
 ways of distribution.
-Section 4 focuses on specific problems this work is aiming to solve.
-While the main goal is improvement of diffoscope according
-to the Reproducible Builds project needs, some specific ways of
-improvement are described in more details.
+Section 4 focuses on specific problems this work is aiming to solve, outlining some of the ways in which diffoscope could be improved.
+Section 5 describes the implementation of new features added to diffoscope.
+Section 6 gives the overview of the current state of the project with focus on how the described tools are used in various situations.
+Section 7 contains the conclusions of the work.
+
 }
 
 
