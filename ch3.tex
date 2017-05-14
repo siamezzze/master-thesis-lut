@@ -1,25 +1,16 @@
 \section{Diffoscope}
+\nomenclature{ICC}{International Color Consortium}
+\nomenclature{TLSH}{Trend Micro Locality Sensitive Hash}
+\nomenclature{DEX}{Dalvik Executable File}
 
-This report focuses on one of the tools being developed by the
+\subsection[General information]{General information}
+This work focuses on one of the tools being developed by the
 Reproducible Build project, diffoscope.
 Diffoscope is a tool for in-depth comparison of files, archives and
 directories \autocite{dfs}.
 The motivation behind development of diffoscope was to have a tool
 telling what exactly have changed between two builds by comparing
-their results. Therefore, the main focus areas for this tool are:
-\begin{itemize}
-    \item Support for file formats that are used in build artifacts. \\
-    Currently diffoscope supports various kinds of archives, packages,
-    as well as some resources file formats, such as JSON data or PNG images.
-    New file formats get constantly added by community.
-    \item User interaction.\\
-    Since the main goal of diffoscope is to provide users with a way to look
-    into what makes two files different, its developers always try to
-    improve the readability of output by hiding non-informative details and
-    emphasizing the real differences. It is desirable that the users would
-    have more control over the output, choosing what they want and what they
-    do not want to be displayed.
-\end{itemize}
+their results. It is widely used by developers to identify reproducibility issues.
 
 Diffoscope is free software licensed under the GNU General Public
 License version 3 or later. It is written in Python3 programming language.
@@ -44,6 +35,16 @@ with focus on better support of various file formats and usability.
 These improvements, too, were mostly dictated by bug and feature requests
 received for diffoscope.
 
+\subsection[Comparing arbitrary files]{Comparing arbitrary files}
+
+Diffoscope is expected to be run on two files, which the user wants to compare. Here is the simplified version of how the process of comparing two arbitrary files looks like.\\
+First, the quick check is made to determine if the files are identical, that is, their content is the same bit-for-bit. If they are, no further comparison is made and diffoscope reports no difference for that file. 
+Otherwise, the files content is compared depending on their type. For that to work, the files are specialized -- that is, their type is determined and the object of the corresponding class is created from the file. There are different tests used to determine if the file match certain class; usually, the decision is made based on the extension or a magic number of the file.\\\\
+Depending on the type of the file, one or more external tool is called to extract the content of file in the human-readable form. For example, for ICC files, containing color profiles, the \texttt{cd-iccdump} tool is used to get the description of color profile in text form. These tools are not part of diffoscope itself. Instead, they are listed as "recommended" for it in package managers so users are expected to install them along with diffoscope. That helps to keep modular system, allowing users to install only the needed tools. If the tool is missing, the detailed comparison will be skipped and binary comparison will be used instead.\\\\
+After the file is translated to a human-readable form using external tools, the result of the translation is then used to compare files using \texttt{diff} tool, which operates on the text inputs and find the lines and words that are different. Since the text here is the processed content of the files, \texttt{diff} essentially finds a difference in the files' content in the form that makes it easier to read for users.\\\\
+If the files can be seen as "containers" -- i.e. they include other files in their content -- diffoscope additionally runs a recursive comparison over their content. To do this, the content files are matched against each other. If their names are the same, the match can be found easily. If not, diffoscope uses TLSH library\autocite{oliver2013tlsh} to find hashes of files and match the files with "closest" hashes. Trivial examples of containers include directories, archives and tarballs, but files like Debian \texttt{.changes} files or \texttt{.dex} files are also compared as containers.\\\\
+There are a number of cases where detailed comparison does not work. These include the cases where file types are different, the required external tool is missing, there are no support for that type of file in diffoscope, the translation resulted in error or diffoscope could not find any difference in translated forms even though the files themselves are different. In any of these cases, diffoscope falls back to "binary comparison" -- the content of the file is treated as binary data, hex dump of that data is made using \texttt{xxd} or similar tool and the results are compared using \texttt{diff}. This option is used as last resort as the hex dumps of binary data are not really human-readable.\\\\
+After result of comparison are acquired, one of the presenter modules is used to construct the easy-to-view result and return it to the user. By default, text presenter is used, and the result is returned to standard output. By providing additional flags, user can choose another form of output, e.g. HTML or restructured text. The user can also specify the name of the output file. Trydiffoscope, Debian reproducibility testing server and other application that show diffoscope output at web pages use HTML as it is easier to read and navigate.
 
 
 %\cleardoublepage
