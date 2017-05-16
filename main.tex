@@ -1,18 +1,19 @@
+% Original template from:
+%
 % Jouni Ritvanen
 % Lappeenranta University of Technology,
 % LUT Energy, P.O.Box 20,
 % FIN-53810 Lappeenranta, FINLAND.
 % ritvanen@lut.fi
 %
-% Compile to pdf, run at command prompt:
-% latex main
-% makeindex main.nlo -s nomencl.ist -o main.nls
-% bibtex main
-% latex main
-% latex main
-% dvipdfm main.dvi
+% -- many thanks!
 %
-% tested with MiKTeX and WinEdt
+% Compile to pdf, run at command prompt:
+% pdflatex main
+% makeindex main.nlo -s nomencl.ist -o main.nls
+% biber main
+% pdflatex main
+%
 
 %\documentclass{lutmscthesis}[2017/01/24]
 \documentclass[a4paper,twoside,12pt,notitlepage,openright]{article}
@@ -59,6 +60,7 @@
 %\singlespacing
 \renewcommand{\baselinestretch}{1.5}
 
+% Header/footer rules (adjust as needed):
 %\pagestyle{fancy}
 %\fancyhf{}% clearing the header and footer
 \renewcommand{\headrulewidth}{0pt}
@@ -98,7 +100,9 @@
 %\addcontentsline{toc}{section}{ABSTRACT}%
 
 \include{acknowledgments}
+% If you want to add it to the TOC:
 %\addtocontents{toc}{\contentsline {section}{Acknowledgments}{}}%
+
 % \input{preface}
 % \cleardoublepage%
 % \thispagestyle{empty}%
