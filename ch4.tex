@@ -1,4 +1,4 @@
-\section{Improving support for specific kinds of files}
+\section{Diffoscope improvement requests}
 
 \nomenclature{APK}{Android Package}
 \nomenclature{ZIP}{ZIP archive file format}
@@ -7,15 +7,26 @@
 \nomenclature{PNG}{Portable Network Graphics - raster graphics file format that supports lossless data compression}
 \nomenclature{TAR}{(t)ape (ar)chive - computer software utility for collecting many files into one archive file}
 \nomenclature{BZIP2}{free and open-source file compression program that uses the Burrows–Wheeler algorithm}
+\nomenclature{BTS}{Bug tracking system}
 
-Diffoscope finds difference between files of various formats in two steps. First, it uses external
-tools specific to this file format to retrieve information about the file in
-human-readable format. Then diffoscope runs the diff tool to find a difference between outputs of that tools.
+As the diffoscope is used by different projects, some of them may have the unique needs, e.g. for some specific file type comparison.
+Some other features, on the other hand, would improve overall functionality and usability of diffoscope and would therefore benefit all of its users.\\\\
 Object-oriented structure of the code makes it relatively easy to add support for
-new file format, and this is one of the obvious ways to improve diffoscope.
+new file formats.
 However, even for the file formats that are already supported, there is still work
 to be done in order to make output more informative and detect differences that
 otherwise would be hidden.
+Bugs and feature requests are usually submitted and reviewed at the Debian bug tracking system \autocite{dfs-bugs}.
+In this work, several feature requests were fullfiled, mostly with focus on improved support for specific types of files.\\\\
+
+
+\subsection[Order-like difference]{Order-like difference}
+\nopagebreak[4]{
+   Sometimes it can be useful to know if texts differ only in lines
+   numbering. While these differences should still be reported, as
+   they mean the build is not reproducible, there should be a comment
+   telling the inputs vary only in line ordering.
+}
 
 \subsection[APK files]{APK files}
 \nopagebreak[4]{
@@ -31,7 +42,7 @@ otherwise would be hidden.
     apktool, aside from other files, generates \texttt{apktool.yml}.
     That file contains meta information about package, such as Android SDK
     version and compression type. It also contains name of the input APK file.\\
-    A request was made (bug \#850501 on Debian bug tracking system \autocite{dfs-bugs})
+    A request was made (bug \#850501 on Debian bug tracking system (BTS) \autocite{dfs-bugs})
     to use more appropriate name, identifying that information as APK metadata and
     not a part of package itself. It is also desirable that input filename be
     removed from this information, as the goal of comparison is compare file
@@ -40,7 +51,7 @@ otherwise would be hidden.
     As APK files is just a specific type of ZIP archives, it is possible to
     extract ZIP archive specific information, such as access permissions,
     encryption status and type of compression, from them. A request was
-    made (bug \#850502 on Debian bug tracking system \autocite{dfs-bugs}) to
+    made (bug \#850502 on Debian BTS \autocite{dfs-bugs}) to
     include comparison of that kind of information in diffoscope output
     for APK files.
     \item Handle \texttt{AndroidManifest.xml} properly.\\
@@ -54,21 +65,22 @@ otherwise would be hidden.
     to show only undecoded version in most cases, as binary version is
     not informative when differences were already reported in more
     human-readable format.
+    This idea comes from the feature request \#850758 on Debian BTS \autocite{dfs-bugs}
     \end{itemize}
 }
 \subsection[Image files]{Image files}
 \nopagebreak[4]{
-   Diffoscope has support for three types of images: JPEG, MS Windows
-   Icon (*.ico) and PNG. Among these, JPEG and ICO images are compared
+   Diffoscope has support for four types of images: JPEG, MS Windows
+   Icon (*.ico), GIF and PNG. Among these, JPEG and ICO images are compared
    using img2text tool, converting image into ASCII-graphics,
-   allowing for easy comparison. PNG files are handled by svg
-   tool, which extracts both metadata and image content (in text format).\\
+   allowing for easy comparison. PNG files are handled by \texttt{svg}
+   tool, which extracts both metadata and image content (in text format), and GIF images are handled by \\
    There are two main feature requests for image comparison:
    \begin{itemize}[noitemsep,nolistsep]
    \item It would be useful to add metadata comparison for JPEG and ICO images.
    That would allow to detect differences in compression type, channel mode,
    color profile used, transparency setting etc.
-   \item When html output option is used, it could be possible to
+   \item When HTML output option is used, it could be possible to
    display difference between image content in image format and not in
    pseudo-graphics.
    \end{itemize}
@@ -82,18 +94,10 @@ otherwise would be hidden.
    Some users would prefer being able to compare container content
    even when their type differs. For example, if one version
    of package is packed into ZIP archive and the other into TAR container
-   with applied BZIP2 compression, it would be preferable to still compare
+   with BZIP2 compression applied, it would be preferable to still compare
    their content. Right now diffoscope does not have this feature --
    it would treat these two packages as completely different files and
    compare them as binary files (byte-for-byte comparison).\\
-}
-
-\subsection[Order-like difference]{Order-like difference}
-\nopagebreak[4]{
-   Sometimes it can be useful to know if texts differ only in lines
-   numbering. While these differences should still be reported, as
-   they mean the build is not reproducible, there should be a comment
-   telling the inputs vary only in line ordering.
 }
 
 %\cleardoublepage
