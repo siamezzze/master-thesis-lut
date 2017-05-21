@@ -23,18 +23,16 @@ compiled libraries or other form of build artifacts, which are the results of so
 process. In fact, it is more common for users to obtain software products in
 form of build artifacts distributed by someone who built it, rather than
 acquiring the source code and building it for themselves. \\\\
-That consideration brings forth certain questions. Is source code really the only
-thing that defines the output of software building process? Do other factors,
-such as configuration of the build system, affect it? How can we be sure these
-factors do not cause the modification of the resulting binary? If they do
-modify it, then just ensuring the source code does not have any flaws does
-not guarantee the resulting binary does not have them, since they could be introduced,
-whether intentionally or not, by build system. \\\\
+That consideration brings forth certain questions. Is the source code really the only
+thing that defines the output of a software building process? Do other factors,
+such as the configuration of the build system, affect it? How can we be sure these
+factors do not cause modification of the resulting binary? If the binary gets modified by varying build environment, then just ensuring the source code does not have any flaws does
+not guarantee the resulting binary does not have them, since these flaws could be introduced,
+whether intentionally or not, by a build system. \\\\
 Open-source projects that place an extra emphasis on security
 and privacy are especially concerned with this possibility, as
 it may leave the products they are building vulnerable to cyberattacks.
-It should come as no surprise that the Tor project was one of the
-first to ring the alarm, alerting others of the problem and taking first steps
+The Tor project was one of the first projects to ring the alarm, alerting others of the problem and taking first steps
 in ensuring what soon would be named reproducible builds \autocite{tor13, tor14}.
 Since then, a lot of free software projects acknowledged the problem and
 tried to come up with a solution. Individual projects concerned with quality
@@ -54,8 +52,7 @@ differences between build artifacts and identify common issues leading to
 unreproducible builds.}
 \subsection[Definitions]{Definitions}
 \nopagebreak[4]{
-As the aftermath the Reproducible Builds World Summit II (December, 2016),
-representatives of projects taking part in the Reproducible Builds effort
+Representatives of projects taking part in the Reproducible Builds effort
 agreed on following definition of reproducible build \autocite{rb-def}:
 \theoremstyle{definition}
 \begin{definition}{Reproducible build.} \\
@@ -105,12 +102,12 @@ two builds, identify and fix common unreproducibility issues.
     \item \textit{trydiffoscope} is an online version of diffoscope. It can be used to compare files without installing diffoscope with all its dependencies.
     \item \textit{disorderfs} is an overlay FUSE (Filesystem in Userspace) filesystem that deliberately introduces non-determinism into filesystem metadata. Since quite a few reproducibility issues are related to the filesystem specifics -- e.g. file order -- disorderfs can be used to identify these issues.
     % TODO: check this
-    \item \textit{strip-nondeterminism} is a library for stripping non-deterministic information, such as timestamps and file system order, from files. Usage of strip-determinism in the build process can be used to achieve reproducibility. However, it is designed as a quick fix tool, not as permanent solution. In general, it is preferred that software handles reproducibility issues internally, without resorting to third-party tool every time it is built.
-    \item \textit{reprotest} is a tool for building the same source code under different environments to check if these changes led to changes in the resulting binaries. reprotest builds the same source code twice in different environments, and then checks the binaries produced by each build for differences. If any are found, then diffoscope is used to display them in detail for later analysis.
+    \item \textit{strip-nondeterminism} is a library for stripping non-deterministic information, such as timestamps and file system order, from files. Usage of strip-determinism in the build process can be used to achieve reproducibility. However, it is designed as a quick fix tool, not as a permanent solution. In general, it is preferred that the software handles reproducibility issues internally, without resorting to a third-party tool every time it is built.
+    \item \textit{reprotest} is a tool for building the same source code under different environments to check if these changes led to changes in the resulting binaries. \textit{reprotest} builds the same source code twice in different environments, and then checks the binaries produced by each build for differences. If any are found, then diffoscope is used to display them in detail for later analysis.
 \end{itemize}
 
 The Reproducible Builds project members have also come up with a \texttt{SOURCE\_DATE\_EPOCH} specification\autocite{SDEspec} to deal with reproducibility issues arising from the usage of timestamps in the build process.
-These issues arise when software packages embed compile-time timestamps into generated files. As the current time changes between builds, this approach leads to the differences in the binaries' contents. 
+These issues arise when software packages embed compile-time timestamps into generated files. As the current time changes between builds, this approach leads to the differences in the binaries' contents. \\\\
 The idea behind the \texttt{SOURCE\_DATE\_EPOCH} proposal is to modify build process of the software to use the environment variable \texttt{SOURCE\_DATE\_EPOCH} instead of the current time if that environment variable is set. 
 That proposal was adopted by several build tools and individual packages\autocite{SDEproposal}, significantly decreasing the number of software packages affected by timestamp-related reproducibility issues.\\
 

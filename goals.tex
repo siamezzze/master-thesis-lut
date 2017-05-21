@@ -10,11 +10,11 @@
 \nomenclature{BTS}{Bug tracking system}
 
 As the diffoscope is used by different projects, some of them may have the unique needs, e.g. for some specific file type comparison.
-Some other features, on the other hand, would improve overall functionality and usability of diffoscope and would therefore benefit all of its users.\\\\
+Some other features, on the other hand, would improve overall functionality and usability of diffoscope and would therefore benefit all its users.\\\\
 Object-oriented structure of the code makes it relatively easy to add support for
 new file formats.
 However, even for the file formats that are already supported, there is still work
-to be done in order to make output more informative and detect differences that
+to be done in order to make output more informative and to detect differences that
 otherwise would be hidden.
 Bugs and feature requests are usually submitted and reviewed at the Debian bug tracking system \autocite{dfs-bugs}.
 In this work, several feature requests were fullfiled, mostly with focus on improved support for specific types of files.\\\\
@@ -22,7 +22,7 @@ In this work, several feature requests were fullfiled, mostly with focus on impr
 
 \subsection[Order-like difference]{Order-like difference}
 \nopagebreak[4]{
-   Sometimes it can be useful to know if texts differ only in lines
+   Sometimes it can be useful to know if the two texts differ only in line
    numbering. While these differences should still be reported, as
    they mean the build is not reproducible, there should be a comment
    telling the inputs vary only in line ordering.
@@ -57,8 +57,8 @@ In this work, several feature requests were fullfiled, mostly with focus on impr
     \item Handle \texttt{AndroidManifest.xml} properly.\\
     \texttt{AndroidManifest.xml} file is an obligatory part of every Android package.
     The manifest file provides information about the application to the
-    Android system, which the system must have before it can run any of the
-    application's code \autocite{andr}.\\
+    Android system, which the system must have before it can run any code of the
+    application \autocite{andr}.\\
     Currently, \texttt{AndroidManifest.xml} is included in diffoscope output twice:
     its undecoded version, recovered by apktool, in XML format
     and its original (decoded) version in binary format. It may be better
@@ -70,11 +70,11 @@ In this work, several feature requests were fullfiled, mostly with focus on impr
 }
 \subsection[Image files]{Image files}
 \nopagebreak[4]{
-   Diffoscope has support for four types of images: JPEG, MS Windows
+   Diffoscope has support for four types of image files: JPEG, MS Windows
    Icon (*.ico), GIF and PNG. Among these, JPEG and ICO images are compared
    using img2text tool, converting image into ASCII-graphics,
    allowing for easy comparison. PNG files are handled by \texttt{svg}
-   tool, which extracts both metadata and image content (in text format), and GIF images are handled by \\
+   tool, which extracts both metadata and image content (in text format), and GIF images are handled by \texttt{gifbuild}.\\\\
    There are two main feature requests for image comparison:
    \begin{itemize}[noitemsep,nolistsep]
    \item It would be useful to add metadata comparison for JPEG and ICO images.
