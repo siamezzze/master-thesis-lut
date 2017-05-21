@@ -14,13 +14,12 @@ Currently, the work of Reproducible Builds project members within Debian is focu
 \subsubsection[Continuous testing of Debian packages]{Continuous testing of Debian packages} 
 Debian reproducibility testing server \autocite{tests-rbo} shows the status of reproducibility of Debian packages across several releases (stable, unstable, experimental) and architectures (amd64, i386, arm64, armhf). Reproducibility testing here means that the package is built two times, with some variations introduced between builds. For the packages that are not reproducible within this setup, diffoscope is run and its output is published, so it is easily accessible for package maintainers, Reproducible Builds project members and other interested parties. Reproducibility tests are re-run periodically, and the statistics about results of these tests is gathered.\\\\
 Figure \ref{fig:stats_sid} shows the current status of reproducibility of Debian packages for unstable version of the distribution built for the amd64 target architecture. Note that the drop in number of reproducible packages in August, 2016 is connected to the new variation -- build path -- being introduced for unstable and experimental distribution. It turned out quite a lot of packages are affected by build path storing issue, and since then, there was quite a lot of work within a project targeting this issue.
-
-\begin{figure}
+\FloatBarrier
+\begin{figure}[h]
 \centering
-\includegraphics[width=1.0\textwidth]{fig/stats_pkg_state.png}
-\caption{\label{fig:stats_sid}Overview of reproducible builds for packages in Debian unstable for amd64 architecture.}
+\includegraphics[width=1.05\textwidth]{fig/stats_pkg_state.png}
+\caption{\label{fig:stats_sid}Overview of reproducible builds for packages in Debian unstable for amd64 architecture. \autocite{tests-rbo}}
 \end{figure}
-
 \subsubsection[Categorizing the issues]{Categorizing the issues} 
 With diffoscope result for the packages available, Reproducible Builds project members try to identify the root issue causing reproducibility. It is often the case that the issue is not within the package itself, but rather in the tools used in the build process. Therefore, it is important to identify common issues and focus on resolving them in a unified way.\\\\
 Two examples of the most common issues are:
@@ -29,19 +28,21 @@ Two examples of the most common issues are:
 \item \textit{Storing Timestamps} -- while this issue was addressed by \texttt{SOURCE\_DATE\_EPOCH}, some packages still record the build date or time.
 \end{itemize}
 Figure \ref{fig:stats_issues} illustrates the changes in the number of identified issues. This number generally rises over time, as new issues are being found and the old ones are often categorized into smaller and more specific issues. Even if the issue is completely dealt with, it is often left in records if it is believed information about it could be useful to other issues or other projects.\\\\
+\FloatBarrier
 
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics[width=1.0\textwidth]{fig/stats_issues.png}
-\caption{\label{fig:stats_issues}Number of categorized reproducibility issues.}
+\includegraphics[width=1.05\textwidth]{fig/stats_issues.png}
+\caption{\label{fig:stats_issues}Number of categorized reproducibility issues. \autocite{tests-rbo}}
 \end{figure}
 
 Figure \ref{fig:stats_notes} shows statistics about number of packages with notes attached to them, meaning that there is an identified issue or some sort of comment for them attached to them. Once again, a massive change is observed at around August, 2016, as the build path variation was introduced, resulting in a lot of packages being labeled with build path recording issue.\\
+\FloatBarrier
 
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics[width=1.0\textwidth]{fig/stats_notes.png}
-\caption{\label{fig:stats_notes}Number of packages that have notes.}
+\includegraphics[width=1.05\textwidth]{fig/stats_notes.png}
+\caption{\label{fig:stats_notes}Number of packages that have notes. \autocite{tests-rbo}}
 \end{figure}
 \subsubsection[Fixing reproducibility bugs]{Fixing reproducibility bugs}
 While only package maintainers or developers actually have the means to fix their package, members of Reproducible Builds project try to help them by reporting the reproducibility issue. As a rule, they also provide a patch that is expected to fix the issue. Sometimes additional coordination with package maintainer or developer is required to ensure the patch fits well within the package and to clarify its meaning.\\\\
