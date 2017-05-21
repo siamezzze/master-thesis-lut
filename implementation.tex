@@ -22,7 +22,16 @@ The solution was to modify comparison of text files, adding the following algori
 
 The new feature is limited to the plain text and some other file types that are treated as plain text (e.g. HTML, XML).
 It was decided there are no sufficient 
-use cases to justify the wider range of supported formats.
+use cases to justify the wider range of supported formats.\\\\
+
+Figure \ref{fig:order} shows how the HTML output looks like when run over two HTML files that are different only in the ordering of lines. Note the ``ordering differences only'' line on the top of the section.
+\FloatBarrier
+
+\begin{figure}
+\centering
+\includegraphics[width=0.95\textwidth]{fig/order-like-diff.png}
+\caption{\label{fig:order}Comparison of two HTML files with ordering-only differences.}
+\end{figure}
 
 }
 \subsection[Improved support for APK files]{Improved support for APK files}
@@ -41,15 +50,17 @@ information about it, has a better support now. Previously, these files were com
 \end{itemize}
 
 Figure \ref{fig:apk} shows how the HTML output looks like when run over two APK files. The diffoscope version in use has the described features included.
-
-These changes are mostly useful for the F-Droid project \autocite{fdroid}, aiming to provide a collection of free Android applications. As part of the F-Droid project, the F-Droid Verification Server \autocite{fdroid-vfs} was set up, with all the applications being tested for reproducibility automatically.
-Better support for APK files allows for a more informative diffoscope output provided for the application that fail these tests.
+\FloatBarrier
 
 \begin{figure}
 \centering
 \includegraphics[width=0.95\textwidth]{fig/apk.png}
 \caption{\label{fig:apk}Comparison of two APK files.}
 \end{figure}
+
+These changes are mostly useful for the F-Droid project \autocite{fdroid}, aiming to provide a collection of free Android applications. As part of the F-Droid project, the F-Droid Verification Server \autocite{fdroid-vfs} was set up, with all the applications being tested for reproducibility automatically.
+Better support for APK files allows for a more informative diffoscope output provided for the application that fail these tests.
+
 
 }
 \subsection[Improved support for image files]{Improved support for image files}
