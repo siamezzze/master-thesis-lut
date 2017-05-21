@@ -106,7 +106,7 @@ two builds, identify and fix common unreproducibility issues.
     \item \textit{reprotest} is a tool for building the same source code under different environments to check if these changes led to changes in the resulting binaries. \textit{reprotest} builds the same source code twice in different environments, and then checks the binaries produced by each build for differences. If any are found, then diffoscope is used to display them in detail for later analysis.
 \end{itemize}
 
-The Reproducible Builds project members have also come up with a \texttt{SOURCE\_DATE\_EPOCH} specification\autocite{SDEspec} to deal with reproducibility issues arising from the usage of timestamps in the build process.
+The Reproducible Builds project members have also come up with a \texttt{SOURCE\_DATE\_EPOCH} specification \autocite{SDEspec} to deal with reproducibility issues arising from the usage of timestamps in the build process.
 These issues arise when software packages embed compile-time timestamps into generated files. As the current time changes between builds, this approach leads to the differences in the binaries' contents. \\\\
 The idea behind the \texttt{SOURCE\_DATE\_EPOCH} proposal is to modify build process of the software to use the environment variable \texttt{SOURCE\_DATE\_EPOCH} instead of the current time if that environment variable is set. 
 That proposal was adopted by several build tools and individual packages\autocite{SDEproposal}, significantly decreasing the number of software packages affected by timestamp-related reproducibility issues.\\
