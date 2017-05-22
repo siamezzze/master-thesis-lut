@@ -100,6 +100,15 @@ The proposed changes implement the following behaviour:
 \item If one of the compared containers has one of following types: \texttt{gzip}, \texttt{bzip2}, \texttt{xz}, \texttt{dex}, it gets unpacked and the contents are compared. This can be safely done because all of these container types are guaranteed to have only one member. This way, the most common use case of nested containers is addressed.
 \end{itemize}
 
+Figure \ref{fig:containers} shows how the HTML output would look like for different types of containers with the proposed changes accepted. In this example, the types of containers, their list of content and the actual content of the files inside the containers differ between the two compared files.
+\FloatBarrier
+
+\begin{figure}
+\centering
+\includegraphics[width=0.95\textwidth]{fig/containers_new.png}
+\caption{\label{fig:containers}Comparison of two containers.}
+\end{figure}
+
 The described changes for cross-container comparison are currently under review and therefore are not included in diffoscope yet.
 }
 
