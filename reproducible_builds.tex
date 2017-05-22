@@ -32,7 +32,7 @@ whether intentionally or not, by a build system. \\\\
 Open-source projects that place an extra emphasis on security
 and privacy are especially concerned with this possibility, as
 it may leave the products they are building vulnerable to cyberattacks.
-The Tor project was one of the first projects to ring the alarm, alerting others of the problem and taking first steps
+The Tor project was one of the first projects to ring the alarm in the 2013, alerting others of the problem and taking first steps
 in ensuring what soon would be named reproducible builds \autocite{tor13, tor14}.
 Since then, a lot of free software projects acknowledged the problem and
 tried to come up with a solution. Individual projects concerned with quality
@@ -91,7 +91,7 @@ The following terms are used in this definition \autocite{rb-def}:
 
 It can be seen from the definition that reproducibility is an attribute of a software product as a whole, as it is affect the build process, that is the link between the source code and the distributed binaries. If the software builds into different binaries when built twice, one cannot assume one of the versions is ``right'' and another one is ``wrong'' -- instead, it can be concluded that the whole software has reproducibility issue that needs to be resolved by altering either the source code or the predefined way this software is built.\\\\
 
-As described in the documentation section of \autocite{rb}, it is not realistically possible, or desirable, to mandate that the same source code is turned into the same sequence of bytes in all situations. The output of a compiler is likely to be different from one version to another as better optimizations are integrated all the time.\\\\
+As described in the documentation section of \autocite{rb}, it is not realistically possible, or desirable, to mandate that the same source code is turned into the same sequence of bytes in all situations. The output of a compiler is likely to be different from one version to another as better optimizations are integrated all the time. 
 Instead, reproducible builds happen in the context of a build environment. It usually comprises the set of tools, required versions, and other assumptions about the operating system and its configuration. A description of this environment should typically be provided alongside any distributed binary package.
 }
 \subsection[Testing reproducibility]{Testing reproducibility}
