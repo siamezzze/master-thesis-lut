@@ -88,7 +88,40 @@ The following terms are used in this definition \autocite{rb-def}:
     a set of artifacts. These may be upstream authors, distribution maintainers or any
     other distributor.
 \end{itemize}
+
+It can be seen from the definition that reproducibility is an attribute of a software product as a whole, as it is affect the build process, that is the link between the source code and the distributed binaries. If the software builds into different binaries when built twice, one cannot assume one of the versions is ``right'' and another one is ``wrong'' -- instead, it can be concluded that the whole software has reproducibility issue that needs to be resolved by altering either the source code or the predefined way this software is built.\\\\
+
+As described in the documentation section of \autocite{rb}, it is not realistically possible, or desirable, to mandate that the same source code is turned into the same sequence of bytes in all situations. The output of a compiler is likely to be different from one version to another as better optimizations are integrated all the time.\\\\
+Instead, reproducible builds happen in the context of a build environment. It usually comprises the set of tools, required versions, and other assumptions about the operating system and its configuration. A description of this environment should typically be provided alongside any distributed binary package.
 }
+\subsection[Testing reproducibility]{Testing reproducibility}
+In practice, reproducibility is tested using the following procedure:
+\begin{itemize}
+    \item The software is built from the provided source the first time, and the result is saved.
+    \item Some variations are introduced into the build environment.
+    \item Build the software the second time from the same sources.
+    \item Compare the results. If they are bit-by-bit identical, it can be assumed the software is reproducible with respect to the introduced variations.
+    \item If the results are not identical, specific tools can be used to find out what exactly has changed between them, therefore helping to identify the underlying reproducibility issue.
+\end{itemize}
+
+The list of variations used by the Reproducible Builds project in the testing process includes 
+    date and time,
+    build path,
+    hostname,
+    domain name,
+    filesystem,
+    environment variables,
+    timezone,
+    language,
+    locale,
+    user name,
+    user id,
+    group name,
+    group id,
+    kernel version,
+    umask,
+    CPU type and number of CPU cores.
+
 
 \subsection[Tools]{Tools}
 \nopagebreak[4]{
