@@ -88,16 +88,16 @@ In this work, several feature requests were fulfilled, mostly with focus on impr
 \subsection[Cross-container comparison]{Cross-container comparison}
 \nopagebreak[4]{
    Unpacking archives to compare their contents and get to the bottom of
-   what makes two files different is the main feature of diffoscope. It
+   what makes two files different is the main feature of diffoscope, since the software is usually distributed in the container format. diffoscope
    can process archives and containers of many kinds. However, it still
-   expect both compared containers to have the same type.\\
+   expect both compared containers to have the same type.\\\\
    Some users would prefer being able to compare container content
    even when their type differs. For example, if one version
    of package is packed into ZIP archive and the other into TAR container
    with BZIP2 compression applied, it would be preferable to still compare
    their content. Right now diffoscope does not have this feature --
    it would treat these two packages as completely different files and
-   compare them as binary files (byte-for-byte comparison).\\
+   compare them as binary files (byte-for-byte comparison).\\\\
 }
 
 %\cleardoublepage
