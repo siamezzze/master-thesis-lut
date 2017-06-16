@@ -1,22 +1,22 @@
-\section{Reproducible Builds for Open-Source Software}
+\chapter{Reproducible Builds for Open-Source Software}
 \nomenclature{FUSE}{Filesystem in Userspace}
 \nomenclature{Tor}{Free software for enabling anonymous communication}
 
-\subsection[Motivation and history]{Motivation and history}
+\section[Motivation and history]{Motivation and history}
 \nopagebreak[4]{
-With the increasing popularity of open-source software \autocite{Anthes16a} and its adoption in large
+With the increasing popularity of open-source software ~\autocite{Anthes16a} and its adoption in large
 scale systems, the security and quality assurance of that software becomes a
 high-priority question. Commercial closed-source software projects rely on
 internal quality assurance methods, and users of their products are expected
 to trust results of such assurance. While it is a working model for many
 companies, it may lead to cases when known or deliberately introduced flaws
 in software are hidden from end-user, the most known example being 2015
-Volkswagen emissions scandal \autocite{Sch15}. \\\\
+Volkswagen emissions scandal ~\autocite{Sch15}. \\\\
 FOSS, on the other hand, uses completely different
 approach. While there is often no person directly responsible of quality assurance,
 publicly available source code means that every interested user or company using
 that software, may examine the code for potential flaws, therefore assuring
-quality for themselves \autocite{hoepman2007increased}.
+quality for themselves ~\autocite{hoepman2007increased}.
 That model assumes that the source code ultimately defines the software product.
 However, in reality people usually use software products in forms of binaries,
 compiled libraries or other form of build artifacts, which are the results of software build
@@ -50,12 +50,12 @@ testing infrastructure \autocite{tests-rbo}, which checks reproducibility
 of Debian packages, and designed several tools helping to find
 differences between build artifacts and identify common issues leading to
 unreproducible builds.}
-\subsection[Definitions]{Definitions}
+\section[Definitions]{Definitions}
 \nopagebreak[4]{
 Representatives of projects taking part in the Reproducible Builds effort
 agreed on following definition of reproducible build \autocite{rb-def}:
-\theoremstyle{definition}
-\begin{definition}{Reproducible build.} \\
+%\theoremstyle{definition}
+\begin{mydefinition}{Reproducible build.} \\
 A build is reproducible if given the same source code, build environment and build
 instructions, any party can recreate bit-by-bit identical copies of all specified artifacts.
 \\
@@ -64,7 +64,7 @@ The relevant attributes of the build environment, the build instructions and the
 code as well as the expected reproducible artifacts are defined by the authors or
 distributors. The artifacts of a build are the parts of the build results that are the
 desired primary output.
-\end{definition}
+\end{mydefinition}
 
 
 The following terms are used in this definition \autocite{rb-def}:
@@ -94,7 +94,7 @@ It can be seen from the definition that reproducibility is an attribute of a sof
 As described in the documentation section of \autocite{rb}, it is not realistically possible, or desirable, to mandate that the same source code is turned into the same sequence of bytes in all situations. The output of a compiler is likely to be different from one version to another as better optimizations are integrated all the time. 
 Instead, reproducible builds happen in the context of a build environment. It usually comprises the set of tools, required versions, and other assumptions about the operating system and its configuration. A description of this environment should typically be provided alongside any distributed binary package.
 }
-\subsection[Testing reproducibility]{Testing reproducibility}
+\section[Testing reproducibility]{Testing reproducibility}
 In practice, reproducibility is tested using the following procedure:
 \begin{itemize}
     \item The software is built from the provided source the first time, and the result is saved.
@@ -123,7 +123,7 @@ The list of variations used by the Reproducible Builds project in the testing pr
     CPU type and number of CPU cores.
 
 
-\subsection[Tools]{Tools}
+\section[Tools]{Tools}
 \nopagebreak[4]{
 
 A number of tools were designed by the Reproducible Builds community to help software

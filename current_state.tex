@@ -1,6 +1,6 @@
-\section{Current state of the Reproducible Builds project}
+\chapter{Current state of the Reproducible Builds project}
 
-\subsection[Debian]{Debian}
+\section[Debian]{Debian}
 \nopagebreak[4]{
 Debian continues its work towards ensuring that all of the packages in the distribution are bit-by-bit reproducible. 
 To continuously check the status of reproducibility of individual packages, testing infrastructure is set up, reporting results on \autocite{tests-rbo}.
@@ -11,7 +11,7 @@ Currently, the work of Reproducible Builds project members within Debian is focu
 \item Categorizing the issues
 \item Fixing reproducibility bugs
 \end{itemize}
-\subsubsection[Continuous testing of Debian packages]{Continuous testing of Debian packages} 
+\subsection[Continuous testing of Debian packages]{Continuous testing of Debian packages} 
 Debian reproducibility testing server \autocite{tests-rbo} shows the status of reproducibility of Debian packages across several releases (stable, unstable, experimental) and architectures (amd64, i386, arm64, armhf). Reproducibility testing here means that the package is built two times, with some variations introduced between builds. For the packages that are not reproducible within this setup, diffoscope is run and its output is published, so it is easily accessible for package maintainers, Reproducible Builds project members and other interested parties. Reproducibility tests are re-run periodically, and the statistics about results of these tests is gathered.\\\\
 Figure \ref{fig:stats_sid} shows the current status of reproducibility of Debian packages for unstable version of the distribution built for the amd64 target architecture. Note that the drop in number of reproducible packages in August, 2016 is connected to the new variation -- build path -- being introduced for unstable and experimental distribution. It turned out quite a lot of packages are affected by build path storing issue, and since then, there was quite a lot of work within a project targeting this issue.\\\\
 At the moment of writing, 23017 of Debian packages build reproducibly in the unstable distribution on the amd64 architecture under the described testing environment, equivalent to 87.6\% of all the packages tested.
@@ -21,7 +21,7 @@ At the moment of writing, 23017 of Debian packages build reproducibly in the uns
 \includegraphics[width=1.05\textwidth]{fig/stats_pkg_state.png}
 \caption{\label{fig:stats_sid}Overview of reproducible builds for packages in Debian unstable for amd64 architecture. \autocite{tests-rbo}}
 \end{figure}
-\subsubsection[Categorizing the issues]{Categorizing the issues} 
+\subsection[Categorizing the issues]{Categorizing the issues} 
 With diffoscope result for the packages available, Reproducible Builds project members try to identify the root issue causing reproducibility. It is often the case that the issue is not within the package itself, but rather in the tools used in the build process. Therefore, it is important to identify common issues and focus on resolving them in a unified way.\\\\
 Two examples of the most common issues are:
 \begin{itemize}[noitemsep]
@@ -54,16 +54,16 @@ Figure \ref{fig:stats_notes} shows statistics about number of packages with note
 \includegraphics[width=1.05\textwidth]{fig/stats_notes.png}
 \caption{\label{fig:stats_notes}Number of packages that have notes. \autocite{tests-rbo}}
 \end{figure}
-\subsubsection[Fixing reproducibility bugs]{Fixing reproducibility bugs}
+\subsection[Fixing reproducibility bugs]{Fixing reproducibility bugs}
 While only package maintainers or developers actually have the means to fix their package, members of Reproducible Builds project try to help them by reporting the reproducibility issue. As a rule, they also provide a patch that is expected to fix the issue. Sometimes additional coordination with package maintainer or developer is required to ensure the patch fits well within the package and to clarify its meaning.\\\\
 A lot of issues are related to the usage of the specific tool in the build process, and therefore it is usually preferred to focus on fixing these issues in the build tool in question, therefore helping all the packages using that tool to achieve reproducibility.
 
 }
-\subsection[F-droid]{F-droid}
+\section[F-droid]{F-droid}
 \nopagebreak[4]{
 The F-Droid project \autocite{fdroid}, that aims to provide an environment of free software for Android smartphones, has set up its own Verification Server \autocite{fdroid-vfs}. It functions in the similar fashion as Debian test infrastructure, rebuilding packages and providing the diffoscope output when results do not match.\\
 }
-\subsection[Other projects]{Other projects}
+\section[Other projects]{Other projects}
 \nopagebreak[4]{
 FreeBSD and NetBSD distributions also continue their work on reproducible builds. Currently, they use less variations between builds than Debian does, but within these constraint, they have achieved significant progress: NetBSD reported 100\% reproducibility within their build system in \autocite{netBSD} and FreeBSD is at 99.6\% at the moment \autocite{freeBSD}.\\
 Arch Linux, Fedora, Coreboot and OpenWrt are also tested along with Debian on reproducibility testing server \autocite{tests-rbo}, although at the lesser scope.\\\\
